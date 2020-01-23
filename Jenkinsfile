@@ -1,4 +1,4 @@
-node("windows") {
+node {
     // reference to maven
     // ** NOTE: This 'Maven' Maven tool must be configured in the Jenkins Global Configuration.
     def mvnHome = tool 'Maven'
