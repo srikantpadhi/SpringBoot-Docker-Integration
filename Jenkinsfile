@@ -20,7 +20,7 @@ node {
 
     stage('2.Build Project') {
        echo "building project start"
-       bat "${mvnHome}/bin/mvn' clean package"
+       bat "${mvnHome}/bin/mvn clean package"
        echo "building project end"
     }
 
