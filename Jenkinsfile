@@ -22,20 +22,20 @@ node {
 
     stage('Build Project') {
       // build project via maven
-      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      bat "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
     }
 
     stage('Build Docker Image') {
       // build docker image
-      sh 'docker build -f Dockerfile -t ${dockerImageName}:${env.BUILD_NUMBER} .'
+      bat 'docker build -f Dockerfile -t ${dockerImageName}:${env.BUILD_NUMBER} .'
     }
 
     stage('Deploy Docker Image'){
        echo "Docker Image Tag Name: ${dockerImageTag}"
       // deploy docker image to docker hub
       withCredentials([string(credentialsId: 'docker-pwd', variable:'dockerHubPwd')]){
-          sh "docker login -u sp05071983 -p ${dockerHubPwd}"
+          bat "docker login -u sp05071983 -p ${dockerHubPwd}"
       }
-      sh "docker push ${dockerImageTag}"
+      bat "docker push ${dockerImageTag}"
     }
 }

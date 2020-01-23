@@ -63,6 +63,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>docker-springboot</finalName>
 	</build>
 
 </project>
