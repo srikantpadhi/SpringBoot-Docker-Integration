@@ -35,6 +35,7 @@ node {
        echo "********Docker Image Tag Name: ${dockerImageTag}***********"
        echo "********Login to DockerHub*********"
        withCredentials([usernameColonPassword(credentialsId: 'docker-pwd', variable:'dockerHubPwd')]){
+           echo "${dockerHubPwd}"
           bat "docker login -u sp05071983 -p ${dockerHubPwd}"
       }
       echo "*******Push Docker Image into DockerHub******"
