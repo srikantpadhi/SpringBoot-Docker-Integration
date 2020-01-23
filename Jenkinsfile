@@ -1,4 +1,4 @@
-node {
+node("windows") {
     // reference to maven
     // ** NOTE: This 'Maven' Maven tool must be configured in the Jenkins Global Configuration.
     def mvnHome = tool 'Maven'
@@ -11,31 +11,32 @@ node {
     def dockerImageName = "docker-springboot"
     def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
 
-    stage('SCM Checkout') { // for display purposes
+    stage('1.SCM Checkout') { // for display purposes
+      echo "pulling code from git"
       // Get some code from a GitHub repository
       git credentialsId: 'git-creds', url: 'https://github.com/srikantpadhi/SpringBoot-Docker-Integration.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'maven-3.6.1' Maven tool must be configured
-      // **       in the global configuration.
       mvnHome = tool 'Maven'
     }
 
-    stage('Build Project') {
-      // build project via maven
-      bat "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+    stage('2.Build Project') {
+       echo "building project start"
+       bat "${mvnHome}/bin/mvn' clean package"
+       echo "building project end"
     }
 
-    stage('Build Docker Image') {
-      // build docker image
-      bat 'docker build -f Dockerfile -t ${dockerImageName}:${env.BUILD_NUMBER} .'
+    stage('3.Build Docker Image') {
+     echo "building docker image"
+      bat "docker build -f Dockerfile -t ${dockerImageName}:${env.BUILD_NUMBER} ."
+      echo"docker Image created successfully"
     }
 
-    stage('Deploy Docker Image'){
+    stage('4.Deploy Docker Image to Docker Hub'){
        echo "Docker Image Tag Name: ${dockerImageTag}"
-      // deploy docker image to docker hub
-      withCredentials([string(credentialsId: 'docker-pwd', variable:'dockerHubPwd')]){
+       echo "Docker Image Tag Name: ${dockerImageTag}"
+       withCredentials([string(credentialsId: 'docker-pwd', variable:'dockerHubPwd')]){
           bat "docker login -u sp05071983 -p ${dockerHubPwd}"
       }
+      echo "Push Docker Image into DockerHub"
       bat "docker push ${dockerImageTag}"
     }
 }
