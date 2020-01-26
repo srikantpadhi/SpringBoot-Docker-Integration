@@ -26,9 +26,10 @@ node {
     stage('4.Deploy Docker Image to Docker Hub'){
        echo "********Docker Image Tag Name: ${dockerImageTag}***********"
        echo "********Login to DockerHub*********"
-       withCredentials([usernameColonPassword(credentialsId: 'docker-pwd', variable:'dockerHubPwd')]){
-           echo "${dockerHubPwd}"
-          bat "docker login --username sp05071983 --password-stdin ${dockerHubPwd}"
+       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds',
+  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+])
+          bat "docker login hub.docer.com -username ${USERNAME} -p ${PASSWORD}"
       }
       echo "*******Push Docker Image into DockerHub******"
       bat "docker push ${dockerImageTag}"
