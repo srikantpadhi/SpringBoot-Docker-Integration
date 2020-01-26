@@ -1,11 +1,11 @@
 pipeline {
+    agent any  
     enviornment{
         mvnHome = tool 'Maven'
         dockerRepoUrl = "https://hub.docker.com/repository/docker/sp05071983/myrepo"
         dockerImageName = "docker-springboot"
         dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     }
-    agent any  
     stages {
       stage('1.SCM Checkout') { 
           steps{
