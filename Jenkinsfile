@@ -27,7 +27,7 @@ node {
        echo "********Docker Image Tag Name: ${dockerImageTag}***********"
        echo "********Login to DockerHub*********"
        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-          bat "docker login hub.docker.com -u ${USERNAME} -p ${PASSWORD}"
+          bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
       echo "*******Push Docker Image into DockerHub******"
       bat "docker push ${dockerImageTag}"
