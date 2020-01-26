@@ -43,6 +43,7 @@ pipeline {
       echo "*******Push Docker Image into DockerHub******"
       bat "docker push ${dockerImageTag}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
-    }
+     }
+   }
   }
 }
