@@ -28,7 +28,7 @@ node {
            bat "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
       }
       echo "*******Push Docker Image ${dockerImageName} into DockerHub*********"
-      bat "docker push sp05071983/myrepo:${dockerImageName}
+      bat "docker push sp05071983/myrepo:${dockerImageName}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
     }
 
