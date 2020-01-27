@@ -32,7 +32,7 @@ node {
     }
     stage('5.Run Docker Container in Dev enviornment'){
         echo "****Running docker image****"
-        bat "docker run -p 8090:8090 sp05071983/${dockerImageName}-${env.BUILD_NUMBER}"
+        bat "docker run -p 8090:8090 sp05071983/myrepo/${dockerImageName}-${env.BUILD_NUMBER}"
     }
 
 }
