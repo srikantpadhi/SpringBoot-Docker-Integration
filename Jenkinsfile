@@ -24,14 +24,14 @@ node {
     }
 
     stage('4.Deploy Docker Image to Docker Hub'){
-       echo "********Docker Image Tag Name: ${dockerImageTag}***********"
        echo "********Login to DockerHub*********"
        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
            echo "uname=$USERNAME pwd=$PASSWORD"
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
       echo "*******Push Docker Image into DockerHub******"
-      bat "docker push ${dockerImageName}"
+      echo "********Docker Image Tag Name: ${dockerImageTag}***********"
+      bat "docker push sp05071983/myrepo:${dockerImageName}:${env.BUILD_NUMBER}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
     }
 
