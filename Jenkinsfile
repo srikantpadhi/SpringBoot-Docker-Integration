@@ -19,7 +19,7 @@ node {
       echo"*********docker Image created successfully********"
     }
 
-    stage('4.Deploy and Run Docker Container'){
+    stage('4.Deploy To Docker Hub'){
        echo "********Login to DockerHub*********"
        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
         {
@@ -27,10 +27,18 @@ node {
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
       echo "*******Push Docker Image ${dockerImageName}-${env.BUILD_NUMBER} into DockerHub*********"
-      bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"
-      echo "****Running docker image****"
-      bat "docker run -p 8090:8090 sp05071983/myrepo/${dockerImageName}-${env.BUILD_NUMBER}"
-        
+      bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"       
     }
+    stage('5. Run Docker Container in Dev Env') {
+         echo "********Login to DockerHub*********"
+       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+        {
+           echo "uname=${USERNAME}r pwd=${PASSWORD}"
+           bat "docker login -u ${USERNAME} -p ${PASSWORD}"
+      }
+      echo "****Running docker image****"
+      bat "docker run -p 8090:8090 sp05071983/myrepo/${dockerImageName}-${env.BUILD_NUMBER}" 
+    }
+
    
 }
