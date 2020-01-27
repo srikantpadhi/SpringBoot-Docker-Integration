@@ -33,7 +33,7 @@ node {
     stage('5. Pull docker Image and Run in Dev enviornment'){
         echo "****Pulling docker image****"
         bat "docker pull sp05071983/${dockerImageName}-${env.BUILD_NUMBER}"
-        echo "****Running docker image****
+        echo "****Running docker image****"
         bat "docker run -p 8090:8090 sp05071983/${dockerImageName}-${env.BUILD_NUMBER}"
     }
 
