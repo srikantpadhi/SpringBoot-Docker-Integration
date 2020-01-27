@@ -15,7 +15,7 @@ node {
 
     stage('3.Create Docker Image') {
       echo "********start building docker image************"
-      bat "docker build -f Dockerfile -t sp05071983/myrepo:${env.BUILD_NUMBER} ."
+        bat "docker build -f Dockerfile -t sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER} ."
       echo"*********docker Image created successfully********"
     }
 
@@ -26,8 +26,8 @@ node {
            echo "uname=${USERNAME}r pwd=${PASSWORD}"
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
-      echo "*******Push Docker Image ${dockerImageName} into DockerHub*********"
-      bat "docker push sp05071983/myrepo:${env.BUILD_NUMBER}"
+      echo "*******Push Docker Image ${dockerImageName}-${env.BUILD_NUMBER} into DockerHub*********"
+      bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
     }
 
