@@ -30,7 +30,6 @@ node {
            echo "uname=$USERNAME pwd=$PASSWORD"
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
-      docker tag ubuntu-xenial-mymicro karlcode/ubuntu-xenial-mymicro:latest
       echo "*******Push Docker Image into DockerHub******"
       bat "docker push ${dockerImageName}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
