@@ -1,6 +1,6 @@
 node {
     def mvnHome = tool 'Maven'
-    def dockerImageName = ""
+    def dockerImageName = "docker-springboot"
     stage('1.Checkout SourceCode') { 
       echo "*********pulling code from git*********"
       git credentialsId: 'git-creds', url: 'https://github.com/srikantpadhi/SpringBoot-Docker-Integration.git'
@@ -15,7 +15,7 @@ node {
 
     stage('3.Create Docker Image') {
       echo "********start building docker image************"
-      dockerImageName = bat "docker build -f Dockerfile -t sp05071983/myrepo:${env.BUILD_NUMBER} ."
+      bat "docker build -f Dockerfile -t sp05071983/myrepo:${env.BUILD_NUMBER} ."
       echo"*********docker Image created successfully********"
     }
 
