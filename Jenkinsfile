@@ -19,7 +19,7 @@ node {
       echo"*********docker Image created successfully********"
     }
 
-    stage('4.Deploy and Run Docker Container){
+    stage('4.Deploy and Run Docker Container'){
        echo "********Login to DockerHub*********"
        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
         {
