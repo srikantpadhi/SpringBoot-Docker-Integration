@@ -24,7 +24,7 @@ node {
        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
         {
            echo "uname=${USERNAME}r pwd=${PASSWORD}"
-           bat "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+           bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
       echo "*******Push Docker Image ${dockerImageName} into DockerHub*********"
       bat "docker push sp05071983/myrepo:${dockerImageName}"
