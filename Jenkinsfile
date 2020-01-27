@@ -30,9 +30,7 @@ node {
       bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"
       echo "*******Docker Image pushed to DockerHub Successfully******"
     }
-    stage('5. Pull docker Image and Run in Dev enviornment'){
-        echo "****Pulling docker image****"
-        bat "docker pull sp05071983/${dockerImageName}-${env.BUILD_NUMBER}"
+    stage('5.Run Docker Container in Dev enviornment'){
         echo "****Running docker image****"
         bat "docker run -p 8090:8090 sp05071983/${dockerImageName}-${env.BUILD_NUMBER}"
     }
