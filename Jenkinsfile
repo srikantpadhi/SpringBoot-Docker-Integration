@@ -26,7 +26,6 @@ node {
            echo "uname=${USERNAME}r pwd=${PASSWORD}"
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
-      bat "docker tag ${dockerImageName}-${env.BUILD_NUMBER} sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"
       echo "*******Push Docker Image ${dockerImageName}-${env.BUILD_NUMBER} into DockerHub*********"
       bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"       
     }
