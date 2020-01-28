@@ -15,7 +15,7 @@ node {
 
     stage('3.Build Docker Image') {
       echo "********start building docker image************"
-        bat "docker build -f Dockerfile -t sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER} ."
+        bat "docker build -f Dockerfile -t sp05071983/myrepo:latest ."
       echo"*********docker Image created successfully********"
     }
 
