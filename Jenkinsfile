@@ -37,7 +37,7 @@ node {
            bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
       echo "****Running docker image****"
-      bat "docker run -p 8090:8090 sp05071983/myrepo/${dockerImageName}-${env.BUILD_NUMBER}" 
+      bat "docker run -p 8090:8090 ${dockerImageName}-${env.BUILD_NUMBER}" 
     }
 
    
