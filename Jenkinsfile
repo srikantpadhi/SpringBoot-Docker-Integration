@@ -29,16 +29,16 @@ node {
       echo "*******Push Docker Image ${dockerImageName}-${env.BUILD_NUMBER} into DockerHub*********"
       bat "docker push sp05071983/myrepo:${dockerImageName}-${env.BUILD_NUMBER}"       
     }
-    stage('5. Run Docker Container in Dev Env') {
-         echo "********Login to DockerHub*********"
-       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
-        {
-           echo "uname=${USERNAME}r pwd=${PASSWORD}"
-           bat "docker login -u ${USERNAME} -p ${PASSWORD}"
+    //stage('5. Run Docker Container in Dev Env') {
+   //      echo "********Login to DockerHub*********"
+   //    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+   //     {
+   //        echo "uname=${USERNAME}r pwd=${PASSWORD}"
+   //        bat "docker login -u ${USERNAME} -p ${PASSWORD}"
       }
-      echo "****Running docker image****"
-      bat "docker run -p 8090:8090 ${dockerImageName}-${env.BUILD_NUMBER}" 
-    }
+   //   echo "****Running docker image****"
+   //   bat "docker run -p 8090:8090 ${dockerImageName}-${env.BUILD_NUMBER}" 
+   // }
 
    
 }
