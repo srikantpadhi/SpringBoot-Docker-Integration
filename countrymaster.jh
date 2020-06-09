@@ -1,0 +1,10 @@
+
+
+entity Country {
+	isoCountryCode String,
+    countryName String,
+    countryIsdCode String,
+    countryCurrencyCode String,
+    isoCountryCode3 String,
+}
+
